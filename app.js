@@ -31,11 +31,12 @@ const index = require('./routes/index');
 
 // authRouter needs to be added so paste the following line:
 const signupRouter = require('./routes/sign-up');
+const loginRouter = require('./routes/log-in');
 
 app.use('/', index);
 app.use('/', signupRouter); // <== has to be added
 //app.use('/', authRouter); // <== has to be added
-
+app.use('/', loginRouter);
 
 
 
