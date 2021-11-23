@@ -2,6 +2,8 @@
 // https://www.npmjs.com/package/dotenv
 require('dotenv/config');
 
+
+
 // ℹ️ Connects to the database
 require('./db');
 
@@ -28,10 +30,11 @@ app.locals.title = `${capitalized(projectName)}- Generated with Ironlauncher`;
 const index = require('./routes/index');
 
 // authRouter needs to be added so paste the following line:
-const authRouter = require('./routes/auth.routes');
+const signupRouter = require('./routes/sign-up');
 
 app.use('/', index);
-app.use('/', authRouter); // <== has to be added
+app.use('/', signupRouter); // <== has to be added
+//app.use('/', authRouter); // <== has to be added
 
 
 

@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 
-<div id="signup">
+<div id="sign-up">
   <h2>Signup</h2>
-  <form action="/signup" method="POST">
+  <form action="/sign-up" method="POST">
+    
     <label>
       Username
       <input type="text" name="username" placeholder="Your username" />
     </label>
- 
-    <label>
-      Email
-      <input type="email" id="input-email" name="email" placeholder="Your email" />
-    </label>
- 
+
     <label>
       Password
       <input type="password" name="password" id="input-password" placeholder="********" />
     </label>
  
     <button>Create account</button>
- 
-    {{!-- error message will be added here --}}
   </form>
+
+    {{#if errorMessage }}
+    <p>{{errorMessage}}</p>
+    {{/if}}
+ 
 </div>
