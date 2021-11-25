@@ -10,7 +10,7 @@ const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 const salt = bcryptjs.genSaltSync(saltRounds)
 
-loginRouter.get('/log-in', (req, res) => res.render('/log-in'));
+loginRouter.get('/log-in', (req, res) => res.render('log-in'));
 
 loginRouter.post('/log-in', (req, res, next) => {
     const { username, password } = req.body;
@@ -32,8 +32,8 @@ loginRouter.post('/log-in', (req, res, next) => {
                 return;
 
                 //  Si User crée + correct password
-                const passwordOK = bcryptjs.compareSync(password, userToFind.passwordHash)
-            } else if (passwordOK) {
+
+            } else if (bcryptjs.compareSync(password, userToFind.passwordHash)) {
                 //req.session.user= userToFind;
                 res.render('users/user-profile', { username });
 
