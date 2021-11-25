@@ -8,3 +8,6 @@ const User = require("../models/User.model")
 
 
 profilRouter.get('/user-profil', (req, res) => res.render('user-profil'));
+
+
+module.exports = profilRouter;
