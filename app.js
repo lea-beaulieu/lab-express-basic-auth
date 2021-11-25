@@ -33,10 +33,13 @@ const index = require('./routes/index');
 const signupRouter = require('./routes/sign-up');
 const loginRouter = require('./routes/log-in');
 
+
 app.use('/', index);
 app.use('/', signupRouter); // <== has to be added
 //app.use('/', authRouter); // <== has to be added
 app.use('/', loginRouter);
+
+
 
 
 

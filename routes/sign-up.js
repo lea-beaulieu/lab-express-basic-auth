@@ -38,7 +38,7 @@ signupRouter.post('/sign-up', (req, res, next) => {
         })
         .then(userFromDB => {
             console.log('Newly created user is: ', userFromDB);
-            res.redirect('/')
+            res.redirect("/log-in")
         })
         .catch(error => next(error));
 });

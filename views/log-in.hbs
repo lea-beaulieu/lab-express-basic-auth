@@ -1,5 +1,6 @@
 <div id="form">
   <h2>Login</h2>
+  
   <form action="/log-in" method="POST">
  
     <label for="username">Username</label>
@@ -10,9 +11,11 @@
  
     <button type="submit">Login</button>
  
-    {{#if errorMessage}}
+
+  </form>
+
+      {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>
     {{/if}}
-  </form>
 </div>
 

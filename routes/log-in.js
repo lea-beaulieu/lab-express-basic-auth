@@ -24,22 +24,25 @@ loginRouter.post('/log-in', (req, res, next) => {
 
     User.findOne({ username })
 
-    .then(userToFind => {
+    .then(user => {
+
 
             // Si User pas crée ou introuvable
-            if (!userToFind) {
+            console.log(password);
+            console.log(user);
+            if (!user) {
                 res.render('/log-in', { errorMessage: 'User is not registered.' });
                 return;
 
                 //  Si User crée + correct password
 
-            } else if (bcryptjs.compareSync(password, userToFind.passwordHash)) {
+            } else if (bcryptjs.compareSync(password, user.passwordHash)) {
                 //req.session.user= userToFind;
-                res.render('users/user-profile', { username });
+                res.render('user-profil', { user });
 
                 // Enfin password faux
             } else {
-                res.render('/log-in', { errorMessage: 'Incorrect password.' });
+                res.render('log-in', { errorMessage: 'Incorrect password.' });
             }
         })
         .catch(error => next(error));
