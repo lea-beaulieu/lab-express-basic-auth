@@ -1,5 +1,5 @@
 var express = require("express");
-var signupRouter = express.Router();
+var loginRouter = express.Router();
 
 
 // je récupère mon modèle
@@ -10,28 +10,39 @@ const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 const salt = bcryptjs.genSaltSync(saltRounds)
 
-router.get('/log-in', (req, res) => res.render('/log-in'));
+loginRouter.get('/log-in', (req, res) => res.render('/log-in'));
 
-router.post('/login', (req, res, next) => {
+loginRouter.post('/log-in', (req, res, next) => {
     const { username, password } = req.body;
-   
+
     if (username === '' || password === '') {
-      res.render('/log-in', {
-        errorMessage: 'Please enter both, email and password to log-in.'
-      });
-      return;
+        res.render('/log-in', {
+            errorMessage: 'Please enter both and password to log-in.'
+        });
+        return;
     }
-   
+
     User.findOne({ username })
-      .then(user => {
-        if (!username) {
-          res.render('/log-in', { errorMessage: 'Email is not registered. Try with other email.' });
-          return;
-        } else if (bcryptjs.compareSync(password, user.passwordHash)) {
-          res.render('users/user-profile', { username });
-        } else {
-          res.render('/log-in', { errorMessage: 'Incorrect password.' });
-        }
-      })
-      .catch(error => next(error));
-  });
+
+    .then(userToFind => {
+
+            // Si User pas crée ou introuvable
+            if (!userToFind) {
+                res.render('/log-in', { errorMessage: 'User is not registered.' });
+                return;
+
+                //  Si User crée + correct password
+                const passwordOK = bcryptjs.compareSync(password, userToFind.passwordHash)
+            } else if (passwordOK) {
+                //req.session.user= userToFind;
+                res.render('users/user-profile', { username });
+
+                // Enfin password faux
+            } else {
+                res.render('/log-in', { errorMessage: 'Incorrect password.' });
+            }
+        })
+        .catch(error => next(error));
+});
+
+module.exports = loginRouter;
